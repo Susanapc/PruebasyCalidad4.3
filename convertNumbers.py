@@ -1,13 +1,24 @@
+"""
+This module provides functions to convert numbers from decimal to bunary
+and from decimal to hexadecimal.
+"""
+# pylint: disable=invalid-name
+import time
 import argparse
-
 def parse_arguments():
+    """
+    This module is an argument parser.
+    """
     parser = argparse.ArgumentParser(description='Convert numbers to binary and hexadecimal.')
     parser.add_argument('filename', type=str, help='Input file containing a list of numbers')
     return parser.parse_args()
 
 def read_numbers_from_file(filename):
+    """
+    This module is used to read numbers from a file.
+    """
     numbers = []
-    with open(filename, 'r') as file:
+    with open(filename, 'r', encoding='utf-8') as file:
         for line_number, line in enumerate(file, start=1):
             try:
                 number = int(line.strip())
@@ -17,6 +28,9 @@ def read_numbers_from_file(filename):
     return numbers
 
 def decimal_to_binary(n):
+    """
+    This module converts from decimal to binary.
+    """
     if n == 0:
         return '0'
     binary = ''
@@ -30,6 +44,9 @@ def decimal_to_binary(n):
     return binary
 
 def decimal_to_hexadecimal(n):
+    """
+    This module converts from decimal to hexadecimal.
+    """
     if n == 0:
         return '0'
     hex_chars = '0123456789ABCDEF'
@@ -44,7 +61,10 @@ def decimal_to_hexadecimal(n):
     return hexadecimal
 
 def write_results_to_file_and_screen(numbers, binary_reprs, hex_reprs, execution_time):
-    with open('ConvertionResults.txt', 'w') as file:
+    """
+    This module writes the results to a file.
+    """
+    with open('ConvertionResults.txt', 'w', encoding='utf-8') as file:
         for number, binary, hexadecimal in zip(numbers, binary_reprs, hex_reprs):
             result = f"Number: {number}, Binary: {binary}, Hexadecimal: {hexadecimal}"
             print(result)
@@ -53,9 +73,10 @@ def write_results_to_file_and_screen(numbers, binary_reprs, hex_reprs, execution
         print(time_info)
         file.write(time_info + '\n')
 
-import time
-
 def main():
+    """
+    This the main function that invokes the rest of the functions.
+    """
     args = parse_arguments()
     start_time = time.time()
     numbers = read_numbers_from_file(args.filename)
@@ -66,4 +87,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

@@ -1,3 +1,8 @@
+# pylint: disable=invalid-name
+"""
+This module provides functions to compute various statistics
+such as mean, median, and standard deviation.
+"""
 #!/usr/bin/env python3
 
 import sys
@@ -6,7 +11,7 @@ import time
 def read_numbers_from_file(filename):
     """Read numbers from a file, ignoring invalid lines."""
     numbers = []
-    with open(filename, 'r') as file:
+    with open(filename, 'r', encoding='utf-8') as file:
         for line in file:
             try:
                 number = float(line.strip())
@@ -28,8 +33,7 @@ def calculate_median(numbers):
     middle = count // 2
     if count % 2 == 0:
         return (sorted_numbers[middle - 1] + sorted_numbers[middle]) / 2
-    else:
-        return sorted_numbers[middle]
+    return sorted_numbers[middle]
 
 def calculate_mode(numbers):
     """Calculate the mode of a list of numbers."""
@@ -43,8 +47,7 @@ def calculate_mode(numbers):
     modes = [num for num, freq in frequency.items() if freq == max_count]
     if len(modes) == 1:
         return modes[0]
-    else:
-        return modes  # In case of multimodal data
+    return modes  # In case of multimodal data
 
 def calculate_variance(numbers, mean):
     """Calculate the variance of a list of numbers."""
@@ -57,11 +60,15 @@ def calculate_standard_deviation(variance):
 
 def write_results_to_file(filename, results):
     """Write the statistical results to a file."""
-    with open(filename, 'w') as file:
+    with open(filename, 'w', encoding='utf-8') as file:
         for key, value in results.items():
             file.write(f"{key}: {value}\n")
 
 def main():
+    """
+    	This is the main fuction of the program that invokes the rest of the functions.
+    	Here is where the files are read and the results are written in the output file
+    """
     if len(sys.argv) != 2:
         print("Usage: python computeStatistics.py fileWithData.txt")
         sys.exit(1)
@@ -99,8 +106,8 @@ def main():
     elapsed_time = end_time - start_time
     print(f"Time elapsed: {elapsed_time:.4f} seconds")
 
-    with open(output_filename, 'a') as file:
+    with open(output_filename, 'a', encoding='utf-8') as file:
         file.write(f"Time elapsed: {elapsed_time:.4f} seconds\n")
 
 if __name__ == "__main__":
-    main()  
+    main()

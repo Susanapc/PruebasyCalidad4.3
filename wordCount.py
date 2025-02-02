@@ -1,3 +1,4 @@
+# pylint: disable=invalid-name
 #!/usr/bin/env python3
 """
 wordCount.py
@@ -59,6 +60,9 @@ def write_results(word_freq, elapsed_time):
         print(f"Error writing results to file: {e}")
 
 def main():
+    """
+    This is the main function that invokes the rest of the functions in the module
+    """
     if len(sys.argv) != 2:
         print("Usage: python wordCount.py fileWithData.txt")
         return
